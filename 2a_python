@@ -1,0 +1,71 @@
+import time
+
+def multiply_matrices_int(A, B, N):
+    C = [[0] * N for _ in range(N)]
+    for i in range(N):
+        for j in range(N):
+            for k in range(N):
+                C[i][j] += A[i][k] * B[k][j]
+    return C
+
+def multiply_matrices_double(A, B, N):
+    C = [[0.0] * N for _ in range(N)]
+    for i in range(N):
+        for j in range(N):
+            for k in range(N):
+                C[i][j] += A[i][k] * B[k][j]
+    return C
+
+sizes = [64, 128, 256, 512, 1024]
+
+for N in sizes:
+    sys_start = time.time()
+    cpu_start = time.process_time()
+    A = [[1] * N for _ in range(N)]
+    B = [[1] * N for _ in range(N)]
+    
+
+
+    mult_start = time.time()
+
+    C = multiply_matrices_int(A, B, N)
+
+    mult_end = time.time()
+
+    cpu_end = time.process_time()
+    sys_end = time.time()
+
+    total_sys_time = sys_end - sys_start
+    total_cpu_time = cpu_end - cpu_start
+    mult_time = mult_end - mult_start
+
+    print(f"N={N}, Integer Matrix Multiplication:")
+    print(f"Total System Time: {total_sys_time:.9f} seconds")
+    print(f"Total CPU Time: {total_cpu_time:.9f} seconds")
+    print(f"Matrix Multiplication Time: {mult_time:.9f} seconds")
+    
+    sys_start = time.time()
+    cpu_start = time.process_time()
+    
+    A_d = [[1.0] * N for _ in range(N)]
+    B_d = [[1.0] * N for _ in range(N)]
+    
+
+
+    mult_start = time.time()
+
+    C_d = multiply_matrices_double(A_d, B_d, N)
+
+    mult_end = time.time()
+
+    cpu_end = time.process_time()
+    sys_end = time.time()
+
+    total_sys_time = sys_end - sys_start
+    total_cpu_time = cpu_end - cpu_start
+    mult_time = mult_end - mult_start
+
+    print(f"N={N}, Double Matrix Multiplication:")
+    print(f"Total System Time: {total_sys_time:.9f} seconds")
+    print(f"Total CPU Time: {total_cpu_time:.9f} seconds")
+    print(f"Matrix Multiplication Time: {mult_time:.9f} seconds")
